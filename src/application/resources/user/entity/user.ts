@@ -1,14 +1,11 @@
+import { createHmac } from 'crypto';
+
 import
 {
    Entity,
    PrimaryGeneratedColumn,
-   JoinColumn,
-   OneToOne,
    Column,
-   CreateDateColumn,
-   ManyToOne,
-   UpdateDateColumn,
-} from 'typeorm';
+} from 'typeorm'; 
 
 @Entity()
 export class User
@@ -36,5 +33,11 @@ export class User
 
    @Column()
    password: string;
+
+   //-------------------------------------------------------------------
+   public static createPasswordHash(pass: string): string
+   {
+      return createHmac('md5', pass).digest().toString();
+   }
 }
  

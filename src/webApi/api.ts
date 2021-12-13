@@ -2,6 +2,7 @@ import Express from 'express';
 import 'express-async-errors';
 import { globalError } from './midlewares/globalError';
 import Sign from './routes/sign';
+import Pix from './routes/pix'
 
 async function create()
 {
@@ -10,6 +11,8 @@ async function create()
    
 
    Sign.createRoutes(app);
+   Pix.createRoutes(app);
+
 
    app.get('/', (req: Express.Request, res: Express.Response) => res.send("Hello World"));
    app.listen(3000, () => console.log("Server is listen"));

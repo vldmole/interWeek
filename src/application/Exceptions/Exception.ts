@@ -8,3 +8,9 @@ export default class Exception
       //todo   
    }
 }
+
+const unknownException = new Exception(500, "Ocorreu um erro inesperado no servidor!");
+export
+{
+   unknownException
+}

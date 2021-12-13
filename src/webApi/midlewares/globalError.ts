@@ -2,10 +2,8 @@ import { NextFunction, Request, Response } from "express";
 
 
 
-function globalError(err: Error, req: Request, res: Response, next: NextFunction)
+function globalErrorHandler(err: Error, req: Request, res: Response, next: NextFunction)
 {
-   console.error("7" + err);
-
    if (err)
       return res.status(500).json(err);
    
@@ -14,4 +12,4 @@ function globalError(err: Error, req: Request, res: Response, next: NextFunction
    });
 }
 
-export { globalError };
+export { globalErrorHandler as globalError };

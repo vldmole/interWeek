@@ -2,14 +2,12 @@ import {
       Entity,
       PrimaryGeneratedColumn,
       JoinColumn,
-      OneToOne,
       Column,
       CreateDateColumn,
       ManyToOne,
-      UpdateDateColumn,
 } from 'typeorm';
    
-import { User } from './user';
+import { User } from '../../user/entity/user';
 
 @Entity()
 export class Pix
@@ -20,16 +18,16 @@ export class Pix
    @Column()
    status: string;
 
-   @ManyToOne(() => User, user => user.id, { nullable: true })
+   @ManyToOne(() => User, user => user.id, { nullable: false })
    @JoinColumn()
    payingUser: User;
 
-   @ManyToOne(() => User, user => user.id, { nullable: true })
+   @ManyToOne(() => User, user => user.id, { nullable: false })
    @JoinColumn()
-   requestingUser: User;
+   receiverUser: User;
 
    @Column()
-   value: string;
+   value: number;
 
    @CreateDateColumn()
    createdAt: string;

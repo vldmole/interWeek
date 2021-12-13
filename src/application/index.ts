@@ -1,5 +1,3 @@
-console.log("index.ts");
-
 import interWeekBank from "./repositories/interWeekBank.orm"
 interWeekBank.connect();
 

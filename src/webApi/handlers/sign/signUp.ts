@@ -1,6 +1,13 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response} from 'express';
+import Api from '../../../application/public/api';
 
-export default function signUp(req: Request, res: Response, next: NextFunction)
+
+const api = Api.getInstance();
+
+export default async function signUp(req: Request, res: Response)
 {
-   res.status(200).send("signUp ok");
+   const dto = req.body;
+   const result = await api.signUp(dto);
+
+   res.status(200).send(result); 
 }
