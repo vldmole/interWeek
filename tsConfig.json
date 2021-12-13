@@ -1,0 +1,22 @@
+{
+   "compilerOptions": 
+   {
+      "module" : "commonjs",
+      "target" : "es6",
+      "strict" : true,
+
+      "rootDir" : "./src",
+      "outDir" : "./build",
+
+      "esModuleInterop": true,
+      "experimentalDecorators" : true,
+      "emitDecoratorMetadata" : true,
+      "strictPropertyInitialization" : false,
+
+      "typeRoots" : [
+         "./src/@types",
+         "./@types",
+         "./node-modules/@types"
+      ]      
+   }
+}
