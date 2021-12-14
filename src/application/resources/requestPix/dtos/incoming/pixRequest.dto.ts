@@ -1,5 +1,5 @@
 export interface PixRequestDto
 {
-   userId: string,
+   userId?: string,
    value: number,   
 }

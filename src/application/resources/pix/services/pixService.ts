@@ -1,11 +1,9 @@
-import { requestPix } from "./pixRequest";
+import { requestPix } from "../../requestPix/services/pixRequest";
 import { payPix } from "./pixPay";
-import { pixTransations, paidPix, receivedPix } from "./pixTransactions";
+import pixQueryTransactions from "./pixTransactions";
 
 export default {
    requestPix,
    payPix,
-   pixTransations,
-   paidPix,
-   receivedPix
+   ...pixQueryTransactions,
 }

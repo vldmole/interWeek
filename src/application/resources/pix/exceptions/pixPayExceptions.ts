@@ -1,17 +1,17 @@
 import Exception from "../../../Exceptions/Exception";
-import { PayPixDto } from "../dtos/PayPix.dto";
+import { IPayPixDto } from "../dtos/incoming/PayPix.dto";
 
-function unknownPayingUser(id: string)
+function unknownPayingUser(id: string | undefined)
 {
    return new Exception(500, `Pagador desconhecido! (id: ${ id })`);
 }
 
-function unknownReceivingUser(id: string)
+function unknownReceivingUser(id: string | undefined)
 {
    return new Exception(500, `Recebedor desconhecido! (id: ${ id })`);
 }
 
-function insufficientMallet(dto: PayPixDto)
+function insufficientMallet(dto: IPayPixDto)
 {
    return new Exception(500, `Saldo insuficient! (dados PIX: ${ dto })`);
 }

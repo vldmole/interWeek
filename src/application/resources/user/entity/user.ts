@@ -39,5 +39,11 @@ export class User
    {
       return createHmac('md5', pass).digest().toString();
    }
+
+   //-------------------------------------------------------------------
+   public completeName()
+   {
+      return `${ this.firstName } ${ this.midleName ? this.midleName + " " : "" }${ this.lastName }`;
+   }
 }
  

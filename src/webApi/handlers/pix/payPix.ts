@@ -1,13 +1,13 @@
 import { Request, Response } from 'express';
 import Api from '../../../application/public/api';
-
-
-const api = Api.getInstance();
+import auth from "../util/authToken"
 
 export default async function requestPix(req: Request, res: Response)
 {
-   const dto = req.body;
-   const result = await api.payPix(dto);
+   const token = auth.extractAuthToken(req);
+   const pixKey = req.body.pixKey;
+   
+   const result = await Api.getInstance().payPix(pixKey, token);
 
    res.status(200).send(result);
 }

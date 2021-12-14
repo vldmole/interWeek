@@ -1,15 +1,15 @@
 
 import userCrud from "../../user/services/crud";
-
-import { PixRequestDto } from "../dtos/PixRequest.dto";
+import { PixRequestDto } from "../dtos/incoming/pixRequest.dto";
 import pixCrud from "./pixRequestCrud";
+import pixQuery from "./queryPixRequest"
 import pixRequestExceptions from "../exceptions/pixRequestExceptions";
-import pixKeyCodec from "../util/pixKey.codec";
+import pixKeyCodec from "../../pix/util/pixKey.codec";
 
 
 export async function requestPix(dto: PixRequestDto): Promise<string>
 {
-   const openRequests = await pixCrud.findAllStatusOpenByUser(dto.userId)
+   const openRequests = await pixQuery.findAllStatusOpenByUser(dto.userId)
    if (openRequests.length > 10)
       throw pixRequestExceptions.maxPixRequestException(dto);
    

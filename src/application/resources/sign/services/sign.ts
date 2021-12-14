@@ -1,5 +1,5 @@
-import signIn from "./signIn.service";
-import signUp from "./signUp.service";
+import signIn from "./signIn";
+import signUp from "./signUp";
 
 
 export default function Sign()

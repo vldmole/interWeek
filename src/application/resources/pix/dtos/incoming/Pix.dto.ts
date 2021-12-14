@@ -1,4 +1,4 @@
-export interface PixDto
+export interface IPixDto
 {
    status: string,
    payingUser: string;

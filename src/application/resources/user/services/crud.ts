@@ -21,9 +21,8 @@ export async function create(dto: CreateUserDto): Promise<User>
       ...dto,
       password: User.createPasswordHash(dto.password),
       accountNumber: "" + Math.floor(Math.random() * 99999) + "-" + Math.floor(Math.random() * 10),
-      mallet: 0.50
+      mallet: 50
    }
-   
    return userRepository.save(newUser);
 }
 
@@ -35,8 +34,11 @@ export async function save(user: User): Promise<User>
 }
 
 //-------------------------------------------------------------------
-export async function findById(id: string): Promise<User | undefined>
+export async function findById(id: string | undefined): Promise<User | undefined>
 {
+   if (!id)
+      return undefined;
+   
    const userRepository = getRepository(User);
    return userRepository.findOne({
       where: {

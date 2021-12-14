@@ -1,14 +1,14 @@
-import { PayPixDto } from "../dtos/PayPix.dto";
+import { IPayPixDto } from "../dtos/incoming/PayPix.dto";
 import pixExceptions from "../exceptions/pixExceptions"
 import pixKeyCodec from "../util/pixKey.codec";
 
-import pixResquestCrud from "./pixRequestCrud";
+import pixResquestCrud from "../../requestPix/services/pixRequestCrud";
 import { Pix } from "../entity/pix";
 import pixCrud from "./pixCrud";
 import userCrud from "../../user/services/crud";
 
 
-export async function payPix(dto: PayPixDto): Promise<Pix>
+export async function payPix(dto: IPayPixDto): Promise<Pix>
 {
    const requestPixData = pixKeyCodec.decodePixKey(dto.pixKey);
 
@@ -39,8 +39,7 @@ export async function payPix(dto: PayPixDto): Promise<Pix>
 
    const pix = await pixCrud.save(pixData);
    
-   pixRequest.status = 'Closed'
-   pixResquestCrud.save(pixRequest);
+   pixResquestCrud.remove(pixRequest);
 
    await userCrud.save(payingUser);
    await userCrud.save(receiverUser);

@@ -1,5 +1,5 @@
 import Exception from "../../../Exceptions/Exception";
-import { PixRequestDto } from "../dtos/PixRequest.dto";
+import { PixRequestDto } from "../dtos/incoming/pixRequest.dto";
 
 
 function requestPixNotFound(pixKey: string)

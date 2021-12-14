@@ -1,11 +1,11 @@
 import { getRepository } from "typeorm";
-import { PixDto } from "../dtos/Pix.dto";
+import { IPixDto } from "../dtos/incoming/Pix.dto";
 import { Pix } from "../entity/pix";
 import pixExceptions from "../exceptions/pixExceptions";
 import userCrud from "../../user/services/crud";
 
 //-------------------------------------------------------------------
-export async function create(dto: PixDto): Promise<Pix>
+export async function create(dto: IPixDto): Promise<Pix>
 {
    const payingUser = await userCrud.findById(dto.payingUser);
    if (!payingUser)
@@ -21,19 +21,24 @@ export async function create(dto: PixDto): Promise<Pix>
       receiverUser,
       value: dto.value
    }
-   return save(pix);
+
+   const pixRepository = getRepository(Pix);
+   return pixRepository.save(pix);
 }
 
 //-------------------------------------------------------------------
 export async function save(pix: Partial<Pix>): Promise<Pix>
 {
    const pixRepository = getRepository(Pix);
-   return await pixRepository.save(pix);
+   return pixRepository.save(pix);
 }
 
 //-------------------------------------------------------------------
-export async function findById(id: string): Promise<Pix | undefined>
+async function findById(id: string | undefined): Promise<Pix | undefined>
 {
+   if (!id)
+      return undefined;
+   
    const pixRepository = getRepository(Pix);
    return pixRepository.findOne({
       where: {
@@ -41,32 +46,10 @@ export async function findById(id: string): Promise<Pix | undefined>
       }
    })
 }
-//-------------------------------------------------------------------
-async function findAllByPayerUser(userId: string): Promise<Pix[]>
-{
-   const pixRepository = getRepository(Pix);
-   return pixRepository.find({
-      where: {
-         "payingUser": userId
-      }
-   })
-}
 
-//-------------------------------------------------------------------
-async function findAllByReceiverUser(userId: string): Promise<Pix[]>
-{
-   const pixRepository = getRepository(Pix);
-   return pixRepository.find({
-      where: {
-         receiverUser: userId
-      }
-   })
-}
 //-------------------------------------------------------------------
 export default {
    create,
-   findAllByPayerUser,
-   findAllByReceiverUser,
    findById,
    save,
 }
